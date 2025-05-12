@@ -4,21 +4,32 @@ let textarea = document.getElementById('textarea')
 let img = document.getElementById('img')
 let userPosts = document.getElementById('user-posts')
 function submitForm() {
-    fetch('https://68219a00259dad2655afc151.mockapi.io/Post', {
-        method: 'POST',
-        body: JSON.stringify({
-            username: username.value,
-            textarea: textarea.value,
-            img: img.value
-        }),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-    })
-    username.value = ''
-    textarea.value = ''
-    img.value = ''
-
+    if (username.value.length <= 4) {
+        alert('The username should be longer than 4 characters')
+        return
+    } else if (textarea.value.length <= 6) {
+        alert('The textarea should be longer than 6 characters')
+        return
+    } else if (!img.value.length) {
+        alert('The image should be a valid URL')
+        return
+    } else {
+        fetch('https://68219a00259dad2655afc151.mockapi.io/Post', {
+            method: 'POST',
+            body: JSON.stringify({
+                username: username.value,
+                textarea: textarea.value,
+                img: img.value
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+        username.value = ''
+        textarea.value = ''
+        img.value = ''
+        return
+    }
 }
 
 
