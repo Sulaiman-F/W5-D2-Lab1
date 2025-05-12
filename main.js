@@ -22,7 +22,7 @@ function submitForm() {
 }
 
 
-document.addEventListener('DOMContentLoaded', function () {
+let loadpost = document.addEventListener('DOMContentLoaded', function () {
     fetch('https://68219a00259dad2655afc151.mockapi.io/Post')
         .then((response) => response.json())
         .then((data) => {
