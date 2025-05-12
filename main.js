@@ -13,7 +13,11 @@ function submitForm() {
     } else if (!img.value.length) {
         alert('The image should be a valid URL')
         return
-    } else {
+    } else if (uniqueUser(username.value) == true) {
+        alert('The username already exists')
+        return
+    }
+    else {
         fetch('https://68219a00259dad2655afc151.mockapi.io/Post', {
             method: 'POST',
             body: JSON.stringify({
@@ -30,6 +34,20 @@ function submitForm() {
         img.value = ''
         return
     }
+}
+function uniqueUser(unUsername) {
+    fetch('https://68219a00259dad2655afc151.mockapi.io/Post')
+        .then((response) => response.json())
+        .then((data) => {
+            data.forEach((data) => {
+                if (unUsername === data.username) {
+                    console.log('The username already exists');
+                    return true
+                } else {
+                    return false
+                }
+            })
+        })
 }
 
 
